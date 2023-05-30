@@ -1,11 +1,19 @@
 {
   "name": "use-doc-theme",
-  "version": "1.0.0",
+  "type": "module",
+"source": "src/index.ts",
+  "version": "0.0.1",
   "description": "React hook for switching theme between light, dark and system. Compatible with TailwindCSS.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "npm build"
+    "build": "npx microbundle"
   },
+  "exports": {
+    "require": "./dist/foo.cjs",      // used for require() in Node 12+
+    "default": "./dist/foo.modern.js" // where to generate the modern bundle (see below)
+  },
+  "module": "./dist/foo.module.js",   // where to generate the ESM bundle
+  "unpkg": "./dist/foo.umd.js",       // where to generate the UMD bundle (also aliased as "umd:main")
   "keywords": [
     "react-hook"
   ],
@@ -18,6 +26,7 @@
   "devDependencies": {
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
+    "microbundle": "^0.15.1",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "typescript": "^5.0.2"
