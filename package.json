@@ -1,0 +1,25 @@
+{
+  "name": "use-doc-theme",
+  "version": "1.0.0",
+  "description": "React hook for switching theme between light, dark and system. Compatible with TailwindCSS.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm build"
+  },
+  "keywords": [
+    "react-hook"
+  ],
+  "author": "Gauravjot Garaya (connect@gauravjot.com)",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "homepage": "https://github.com/nzran/use-doc-theme",
+  "devDependencies": {
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "typescript": "^5.0.2"
+  }
+}
