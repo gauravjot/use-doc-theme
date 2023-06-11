@@ -29,7 +29,7 @@ This library for Reactjs includes two hooks:
 
 1. **useDocTheme**
     - Supports dark, light and system theme with body class of `dark`.
-    - Supports Tailwind.
+    - Supports Tailwind CSS.
     - By default apply system theme.
 2. **useLocalStorage**
     - Supports saving and loading data from browser's local storage.
@@ -44,25 +44,43 @@ npm install use-doc-theme --save
 
 ### 1. useDocTheme
 
-This is the simplest implementation of the hook.
+This is the simplest implementation of the hook. Intializing the hook will apply the theme and will give you access to its methods.
 
 ```javascript
 import { useDocTheme } from "use-doc-theme";
 
 function App() {
- const theme = useDocTheme();
+  const theme = useDocTheme();
 
- return (
-  <>
-   <button onClick={theme.toggle}>Toggle</button>
-  </>
- );
+  return (
+    <>
+      <button onClick={theme.toggle}>Toggle</button>
+    </>
+  );
+}
+```
+
+If you **only want to apply the theme**, you can skip assigning the hook to a variable.
+
+```javascript
+import { useDocTheme } from "use-doc-theme";
+
+function App() {
+  // applies the theme
+  useDocTheme();
+
+  return (...);
 }
 ```
 
 #### Default Behavior
 
-Using the hook will by default apply system theme.
+Using the hook will apply the system theme or the theme saved in local storage. This behavior can be changed by passing `false` into hook initialization that will skip applying the theme.
+
+```javascript
+// Does not automatically apply theme
+const theme = useDocTheme(false);
+```
 
 #### Available Options
 
@@ -94,6 +112,46 @@ if (theme.isDarkMode) {
 }
 ```
 
+### Tailwind CSS Support
+
+Add this to your `tailwind.config.js` file.
+
+```javascript
+module.exports = {
+  darkMode: 'class',
+  // ...
+}
+```
+
+Learn more here: [Dark Mode - Tailwind CSS](https://tailwindcss.com/docs/dark-mode).
+
+### Regular CSS
+
+Use `.dark` class. For example:
+
+```css
+.hello {
+  background: white;
+  color: black;
+}
+
+.dark .hello {
+  /* dark theme */
+  background: black;
+  color: white;
+}
+```
+
+For `body` tag, use
+
+```css
+body.dark {
+  /* dark theme */
+  background: black;
+  color: white;
+}
+```
+
 ### 2. useLocalStorage
 
 The `useLocalStorage` hook takes **two string parameters**. The first parameter is the name of **key** in local storage and the second is the **default value** in case local storage does not already have value for the key.
@@ -102,33 +160,22 @@ The `useLocalStorage` hook takes **two string parameters**. The first parameter 
 import { useLocalStorage } from "use-doc-theme";
 
 function App() {
- const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
+  const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
 
- return (
-  <>
-   <button
-    onClick={() => {
-     setBook("Happy Place by Emily Henry");
-    }}
-   >
-    Switch Book
-   </button>
+  return (
+    <>
+      <button
+        onClick={() => {
+          setBook("Happy Place by Emily Henry");
+        }}
+      >
+        Switch Book
+      </button>
 
-   <h1>Current book</h1>
-   <p>{book}</p>
-  </>
- );
-}
-```
-
-## Tailwind Support
-
-Add this to your `tailwind.config.js` file.
-
-```javascript
-module.exports = {
-  darkMode: 'class',
-  // ...
+      <h1>Current book</h1>
+      <p>{book}</p>
+    </>
+  );
 }
 ```
 
