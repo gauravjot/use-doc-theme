@@ -21,22 +21,20 @@
 
 This library for Reactjs includes two hooks:
 
-**useDocTheme**
-
--   Supports dark, light and system theme with body class of `dark`.
--   Supports Tailwind
-
-**useLocalStorage**
-
--   Supports saving and loading data from browser's local storage.
+1. **useDocTheme**
+    - Supports dark, light and system theme with body class of `dark`.
+    - Supports Tailwind.
+    - By default apply system theme.
+2. **useLocalStorage**
+    - Supports saving and loading data from browser's local storage.
 
 ## Installation
 
 ```bash
-npm install --save use-doc-theme
+npm install use-doc-theme --save
 ```
 
-## Simple Usage
+## Usage
 
 ### 1. useDocTheme
 
@@ -47,19 +45,18 @@ import { useDocTheme } from "use-doc-theme";
 
 function App() {
 	const theme = useDocTheme();
+
 	return (
 		<>
-			<button
-				onClick={() => {
-					theme.toggle();
-				}}
-			>
-				Toggle
-			</button>
+			<button onClick={theme.toggle}>Toggle</button>
 		</>
 	);
 }
 ```
+
+#### Default Behavior
+
+Using the hook will by default apply system theme.
 
 #### Available Options
 
@@ -93,28 +90,30 @@ if (theme.isDarkMode) {
 
 ### 2. useLocalStorage
 
+The `useLocalStorage` hook takes **two string parameters**. The first parameter is the name of **key** in local storage and the second is the **default value** in case local storage does not already have value for the key.
+
 ```javascript
 import { useLocalStorage } from "use-doc-theme";
 
 function App() {
-    const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
+	const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
 
-    return (
-        <>
-            <button
-                onClick={() => {
-                    setBook("Happy Place by Emily Henry");
-                }}>
-                Switch Book
-            </button>
-            <h1>Current book</h1>
-            <p>{book}</p>
-        </h1>
-    );
+	return (
+		<>
+			<button
+				onClick={() => {
+					setBook("Happy Place by Emily Henry");
+				}}
+			>
+				Switch Book
+			</button>
+
+			<h1>Current book</h1>
+			<p>{book}</p>
+		</>
+	);
 }
 ```
-
-The `useLocalStorage` hook takes **two string parameters**. The first parameter is the name of **key** in local storage and the second is the **default value** in case local storage does not already have value for the key.
 
 ## Contribution
 
