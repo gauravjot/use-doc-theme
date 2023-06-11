@@ -5,7 +5,7 @@
  */
 import useLocalStorage from "./useLocalStorage";
 
-export default function useTheme(autoapply = true): {
+export default function useDocTheme(autoapply = true): {
 	isDarkMode: boolean;
 	isLightMode: boolean;
 	isSystemMode: boolean;

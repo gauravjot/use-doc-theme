@@ -1,5 +1,4 @@
-import useLocalStorage from "./hooks/useLocalStorage";
-import useTheme from "./hooks/useTheme";
+import useLocalStorage from "./useLocalStorage";
+import useDocTheme from "./useDocTheme";
 
-module.exports(useTheme);
-module.exports(useLocalStorage);
+export { useDocTheme, useLocalStorage };

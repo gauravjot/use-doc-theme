@@ -2,20 +2,31 @@
 	"name": "use-doc-theme",
 	"type": "module",
 	"source": "src/index.ts",
-	"version": "0.0.1",
+	"version": "0.1.1",
 	"description": "React hook for switching theme between light, dark and system. Compatible with TailwindCSS.",
 	"main": "dist/index.js",
+	"esmodule": "dist/index.modern.js",
+	"umd:main": "dist/index.umd.js",
 	"scripts": {
-		"build": "npx microbundle"
+		"build": "microbundle build --entry src/index.ts --name use-doc-theme --tsconfig tsconfig.json"
 	},
 	"exports": {
-		"require": "./dist/index.cjs",
-		"default": "./dist/index.modern.js"
+		".": {
+			"types": "./dist/index.d.ts",
+			"module": "./dist/index.esm.js",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		},
+		"./package.json": "./package.json"
 	},
-	"module": "./dist/index.module.js",
-	"unpkg": "./dist/index.umd.js",
 	"keywords": [
 		"react-hook"
+	],
+	"engines": {
+		"node": ">= 10.0.0"
+	},
+	"files": [
+		"dist"
 	],
 	"author": "Gauravjot Garaya (connect@gauravjot.com)",
 	"license": "MIT",
