@@ -2,6 +2,7 @@
   <a href="https://www.npmjs.com/package/use-doc-theme">
     <img src="https://raw.githubusercontent.com/nzran/use-doc-theme/main/usedoctheme-logo.png" width="700" alt="use-debounce" />
   </a>
+  <br/>
   <small>Hook to change website theme. Reactjs. Supports Tailwind.</small>
 </div>
 <br/>
