@@ -1,5 +1,10 @@
-![Use Doc Theme](usedoctheme-logo.png)
-
+<div align="center">
+  <a href="https://www.npmjs.com/package/use-doc-theme">
+    <img src="https://raw.githubusercontent.com/nzran/use-doc-theme/main/usedoctheme-logo.png" width="700" alt="use-debounce" />
+  </a>
+  <small>Hook to change website theme. Reactjs. Supports Tailwind.</small>
+</div>
+<br/>
 <div align="center">
   <a href="https://www.npmjs.com/package/use-doc-theme">
     <img alt="npm" src="https://img.shields.io/npm/v/use-doc-theme.svg" />
@@ -44,13 +49,13 @@ This is the simplest implementation of the hook.
 import { useDocTheme } from "use-doc-theme";
 
 function App() {
-	const theme = useDocTheme();
+ const theme = useDocTheme();
 
-	return (
-		<>
-			<button onClick={theme.toggle}>Toggle</button>
-		</>
-	);
+ return (
+  <>
+   <button onClick={theme.toggle}>Toggle</button>
+  </>
+ );
 }
 ```
 
@@ -84,7 +89,7 @@ theme.toggle();
  * - isSystemMode
  */
 if (theme.isDarkMode) {
-	// Dark Theme is active
+ // Dark Theme is active
 }
 ```
 
@@ -96,22 +101,33 @@ The `useLocalStorage` hook takes **two string parameters**. The first parameter 
 import { useLocalStorage } from "use-doc-theme";
 
 function App() {
-	const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
+ const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
 
-	return (
-		<>
-			<button
-				onClick={() => {
-					setBook("Happy Place by Emily Henry");
-				}}
-			>
-				Switch Book
-			</button>
+ return (
+  <>
+   <button
+    onClick={() => {
+     setBook("Happy Place by Emily Henry");
+    }}
+   >
+    Switch Book
+   </button>
 
-			<h1>Current book</h1>
-			<p>{book}</p>
-		</>
-	);
+   <h1>Current book</h1>
+   <p>{book}</p>
+  </>
+ );
+}
+```
+
+## Tailwind Support
+
+Add this to your `tailwind.config.js` file.
+
+```javascript
+module.exports = {
+  darkMode: 'class',
+  // ...
 }
 ```
 
