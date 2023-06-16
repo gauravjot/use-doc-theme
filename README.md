@@ -23,6 +23,8 @@
 
 ---
 
+![demo pure css](https://raw.githubusercontent.com/nzran/use-doc-theme/main/demo-pure-css.gif)
+
 ## Features
 
 This library for Reactjs includes two hooks:
@@ -42,18 +44,23 @@ npm install use-doc-theme --save
 
 ## Usage
 
+See the demo, built with Reactjs and pure CSS: [https://codepen.io/gauravjot/full/yLQexGR](https://codepen.io/gauravjot/full/yLQexGR)
+
 ### 1. useDocTheme
 
 This is the simplest implementation of the hook. Intializing the hook will apply the theme and will give you access to its methods.
 
 ```javascript
+/* import */
 import { useDocTheme } from "use-doc-theme";
 
 function App() {
+  /* initialize */
   const theme = useDocTheme();
 
   return (
     <>
+      {/* usage */}
       <button onClick={theme.toggle}>Toggle</button>
     </>
   );
