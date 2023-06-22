@@ -5,6 +5,10 @@
  */
 import useLocalStorage from "./useLocalStorage";
 
+/**
+ * Sets the theme to dark, light or system.
+ * @param autoapply apply the theme automatically on using this hook.
+ */
 export default function useDocTheme(autoapply = true): {
 	isDarkMode: boolean;
 	isLightMode: boolean;

@@ -4,10 +4,16 @@
 
 import { useEffect, useState } from "react";
 
+/**
+ * Get and save data with local storage.
+ * @param key used to select the key in local storage
+ * @param initialValue if no value is represent then return this value without saving it.
+ * @returns `[value, setValue]`
+ */
 export default function useLocalStorage(key: string, initialValue: string) {
 	// State to store our value
 	// Pass initial state function to useState so logic is only executed once
-	const [storedValue, setStoredValue] = useState(() => initialValue);
+	const [storedValue, setStoredValue] = useState<string>();
 
 	const initialize = () => {
 		try {
@@ -33,7 +39,8 @@ export default function useLocalStorage(key: string, initialValue: string) {
 	const setValue = (value: string | ((val: string) => string)) => {
 		try {
 			// Allow value to be a function so we have same API as useState
-			const valueToStore = value instanceof Function ? value(storedValue) : value;
+			const valueToStore =
+				value instanceof Function ? value(storedValue || initialValue) : value;
 			// Save state
 			setStoredValue(valueToStore);
 			// Save to local storage
