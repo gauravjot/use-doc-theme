@@ -42,7 +42,7 @@ This library for Reactjs includes two hooks:
 npm install use-doc-theme --save
 ```
 
-> `@latest` version supports React 18. Use `@0.2.0` for React 16.
+> `@latest` version supports **React 18.3.1**. Use `@0.2.0` for earlier React versions.
 
 ## Usage
 
