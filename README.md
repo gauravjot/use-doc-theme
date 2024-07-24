@@ -110,12 +110,15 @@ theme.toggle();
 
 /*
  * Check active theme
- * - isDarkMode
- * - isLightMode
- * - isSystemMode
  */
 if (theme.isDarkMode) {
  // Dark Theme is active
+}
+if (theme.isLightMode) {
+ // Light Theme is active
+}
+if (theme.isSystemMode) {
+ // System Theme is active
 }
 ```
 
@@ -163,11 +166,13 @@ body.dark {
 
 The `useLocalStorage` hook takes **two string parameters**. The first parameter is the name of **key** in local storage and the second is the **default value** in case local storage does not already have value for the key.
 
+It behaves identical to `useState` with plus side that the state is saved in local storage.
+
 ```javascript
 import { useLocalStorage } from "use-doc-theme";
 
 function App() {
-  const [book, setBook] = useLocalStorage("book", "The Alchemist by Paulo Coelho");
+  const [book, setBook] = useLocalStorage<string>("book", "The Alchemist by Paulo Coelho");
 
   return (
     <>
@@ -185,6 +190,8 @@ function App() {
   );
 }
 ```
+
+Data saved into local storage gets JSON stringified so you may also save objects.
 
 ## Contribution
 

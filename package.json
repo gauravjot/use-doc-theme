@@ -2,7 +2,7 @@
 	"name": "use-doc-theme",
 	"type": "module",
 	"source": "src/index.ts",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "React hook for switching theme between light, dark and system. Compatible with TailwindCSS.",
 	"main": "dist/index.js",
 	"esmodule": "dist/index.modern.js",

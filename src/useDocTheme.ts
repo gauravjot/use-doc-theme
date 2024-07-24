@@ -3,6 +3,7 @@
  * - Supports TailwindCSS
  * - Adds 'dark' class to <body>
  */
+import { useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 
 /**
@@ -18,18 +19,21 @@ export default function useDocTheme(autoapply = true): {
 	system: () => void;
 	toggle: () => void;
 } {
-	const [theme, setTheme] = useLocalStorage("nzran-theme", "system");
+	const [theme, setTheme] = useLocalStorage<string>("nzran-theme", "system");
+	const [isIntialLoad, setIsInitialLoad] = useState(true);
 
 	// DOM inserts
 	function changeToDark() {
 		document.body.classList.add("dark");
+		if (isIntialLoad) setIsInitialLoad(false);
 	}
 	function changeToLight() {
 		document.body.classList.remove("dark");
+		if (isIntialLoad) setIsInitialLoad(false);
 	}
 
 	// Set default color accoriding to browser's theme
-	if (autoapply) {
+	if (autoapply && isIntialLoad) {
 		if (
 			window.matchMedia &&
 			window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -87,12 +91,12 @@ export default function useDocTheme(autoapply = true): {
 		toggle: () => {
 			if (theme === "light") {
 				// if it is light, switch to dark
-				setTheme("dark");
 				changeToDark();
+				setTheme("dark");
 			} else if (theme === "dark") {
 				// if it is dark, switch to light
-				setTheme("light");
 				changeToLight();
+				setTheme("light");
 			} else if (theme === "system") {
 				// if it is system, we need to know what theme system has
 				if (
@@ -100,12 +104,12 @@ export default function useDocTheme(autoapply = true): {
 					window.matchMedia("(prefers-color-scheme: dark)").matches
 				) {
 					// system has dark theme
-					setTheme("light");
 					changeToLight();
+					setTheme("light");
 				} else {
 					// system has light theme
-					setTheme("dark");
 					changeToDark();
+					setTheme("dark");
 				}
 			}
 		},
