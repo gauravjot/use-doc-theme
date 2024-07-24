@@ -42,6 +42,8 @@ This library for Reactjs includes two hooks:
 npm install use-doc-theme --save
 ```
 
+> `@latest` version supports React 18. Use `@0.2.0` for React 16.
+
 ## Usage
 
 See the demo, built with Reactjs and pure CSS: [https://codepen.io/gauravjot/full/yLQexGR](https://codepen.io/gauravjot/full/yLQexGR)
