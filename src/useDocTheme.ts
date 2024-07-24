@@ -3,7 +3,6 @@
  * - Supports TailwindCSS
  * - Adds 'dark' class to <body>
  */
-import { useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 
 /**
@@ -20,20 +19,17 @@ export default function useDocTheme(autoapply = true): {
 	toggle: () => void;
 } {
 	const [theme, setTheme] = useLocalStorage<string>("nzran-theme", "system");
-	const [isIntialLoad, setIsInitialLoad] = useState(true);
 
 	// DOM inserts
 	function changeToDark() {
 		document.body.classList.add("dark");
-		if (isIntialLoad) setIsInitialLoad(false);
 	}
 	function changeToLight() {
 		document.body.classList.remove("dark");
-		if (isIntialLoad) setIsInitialLoad(false);
 	}
 
 	// Set default color accoriding to browser's theme
-	if (autoapply && isIntialLoad) {
+	if (autoapply) {
 		if (
 			window.matchMedia &&
 			window.matchMedia("(prefers-color-scheme: dark)").matches
