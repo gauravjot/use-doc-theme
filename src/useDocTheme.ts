@@ -5,19 +5,12 @@
  */
 import useLocalStorage from "./useLocalStorage";
 
-// DOM inserts
-function changeToDark() {
-	document.body.classList.add("dark");
-}
-function changeToLight() {
-	document.body.classList.remove("dark");
-}
-
 /**
  * Sets the theme to dark, light or system.
- * @param autoapply apply the theme automatically on using this hook.
+ * 
+ * Read: https://github.com/gauravjot/use-doc-theme?tab=readme-ov-file#2-usedoctheme
  */
-export default function useDocTheme(autoapply = true): {
+export default function useDocTheme(): {
 	isDarkMode: boolean;
 	isLightMode: boolean;
 	isSystemMode: boolean;
@@ -33,32 +26,20 @@ export default function useDocTheme(autoapply = true): {
 		isSystemMode: theme === "system",
 		isLightMode: theme === "light",
 		dark: () => {
-			changeToDark();
 			setTheme("dark");
 		},
 		light: () => {
-			changeToLight();
 			setTheme("light");
 		},
 		system: () => {
-			if (
-				window.matchMedia &&
-				window.matchMedia("(prefers-color-scheme: dark)").matches
-			) {
-				changeToDark();
-			} else {
-				changeToLight();
-			}
 			setTheme("system");
 		},
 		toggle: () => {
 			if (theme === "light") {
 				// if it is light, switch to dark
-				changeToDark();
 				setTheme("dark");
 			} else if (theme === "dark") {
 				// if it is dark, switch to light
-				changeToLight();
 				setTheme("light");
 			} else if (theme === "system") {
 				// if it is system, we need to know what theme system has
@@ -67,11 +48,9 @@ export default function useDocTheme(autoapply = true): {
 					window.matchMedia("(prefers-color-scheme: dark)").matches
 				) {
 					// system has dark theme
-					changeToLight();
 					setTheme("light");
 				} else {
 					// system has light theme
-					changeToDark();
 					setTheme("dark");
 				}
 			}
