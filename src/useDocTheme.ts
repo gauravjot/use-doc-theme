@@ -5,6 +5,14 @@
  */
 import useLocalStorage from "./useLocalStorage";
 
+// DOM inserts
+function changeToDark() {
+	document.body.classList.add("dark");
+}
+function changeToLight() {
+	document.body.classList.remove("dark");
+}
+
 /**
  * Sets the theme to dark, light or system.
  * @param autoapply apply the theme automatically on using this hook.
@@ -19,47 +27,6 @@ export default function useDocTheme(autoapply = true): {
 	toggle: () => void;
 } {
 	const [theme, setTheme] = useLocalStorage<string>("nzran-theme", "system");
-
-	// DOM inserts
-	function changeToDark() {
-		document.body.classList.add("dark");
-	}
-	function changeToLight() {
-		document.body.classList.remove("dark");
-	}
-
-	// Set default color accoriding to browser's theme
-	if (autoapply) {
-		if (
-			window.matchMedia &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches
-		) {
-			if (theme === "dark" || theme === "system") {
-				changeToDark();
-			} else if (theme === "light") {
-				changeToLight();
-			}
-		} else {
-			if (theme === "light" || theme === "system") {
-				changeToLight();
-			} else if (theme === "dark") {
-				changeToDark();
-			}
-		}
-
-		// Detect browser's theme change
-		window
-			.matchMedia("(prefers-color-scheme: dark)")
-			.addEventListener("change", (event) => {
-				if (theme === null) {
-					if (event.matches) {
-						changeToDark();
-					} else {
-						changeToLight();
-					}
-				}
-			});
-	}
 
 	return {
 		isDarkMode: theme === "dark",

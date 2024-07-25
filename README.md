@@ -23,7 +23,26 @@
 
 ---
 
+<div align="center">
+
 ![demo pure css](https://raw.githubusercontent.com/nzran/use-doc-theme/main/demo-pure-css.gif)
+
+</div>
+
+## Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [1. Setup ThemeProvider](#1-setup-themeprovider)
+  - [2. useDocTheme](#2-usedoctheme)
+    - [Available Options](#available-options)
+  - [CSS Setup](#css-setup)
+    - [Tailwind CSS](#tailwind-css)
+    - [Regular CSS](#regular-css)
+- [Utility &mdash; useLocalStorage](#utility--uselocalstorage)
+- [Contribution](#contribution)
+
 
 ## Features
 
@@ -48,9 +67,28 @@ npm install use-doc-theme --save
 
 See the demo, built with Reactjs and pure CSS: [https://codepen.io/gauravjot/full/yLQexGR](https://codepen.io/gauravjot/full/yLQexGR)
 
-### 1. useDocTheme
+### 1. Setup ThemeProvider
 
-This is the simplest implementation of the hook. Intializing the hook will apply the theme and will give you access to its methods.
+In your _App.tsx_ or _layout.tsx_ file, wrap your app with `ThemeProvider`.
+
+```javascript
+import { ThemeProvider } from "use-doc-theme";
+
+export default function App() {
+
+  return (
+    <ThemeProvider>
+      {...your other components}
+    </ThemeProvider>
+  );
+}
+```
+
+This will detect the user's selected theme or theme set by system.
+
+### 2. useDocTheme
+
+Intializing the hook to access various theme controls.
 
 ```javascript
 /* import */
@@ -69,28 +107,6 @@ function App() {
 }
 ```
 
-If you **only want to apply the theme**, you can skip assigning the hook to a variable.
-
-```javascript
-import { useDocTheme } from "use-doc-theme";
-
-function App() {
-  // applies the theme
-  useDocTheme();
-
-  return (...);
-}
-```
-
-#### Default Behavior
-
-Using the hook will apply the system theme or the theme saved in local storage. This behavior can be changed by passing `false` into hook initialization that will skip applying the theme.
-
-```javascript
-// Does not automatically apply theme
-const theme = useDocTheme(false);
-```
-
 #### Available Options
 
 These are all the available methods and options.
@@ -98,33 +114,36 @@ These are all the available methods and options.
 ```javascript
 const theme = useDocTheme();
 
-// Switch to Light Mode
+// Apply Light
 theme.light();
 
-// Switch to Dark Mode
+// Apply Dark
 theme.dark();
 
-// Apply System Theme
+// Apply System
 theme.system();
 
-// Toggle between dark and light
+// Toggle
 theme.toggle();
 
-/*
- * Check active theme
- */
-if (theme.isDarkMode) {
- // Dark Theme is active
-}
+// Check active theme
+
 if (theme.isLightMode) {
  // Light Theme is active
 }
+
+if (theme.isDarkMode) {
+ // Dark Theme is active
+}
+
 if (theme.isSystemMode) {
  // System Theme is active
 }
 ```
 
-### Tailwind CSS Support
+### CSS Setup
+
+#### Tailwind CSS
 
 Add this to your `tailwind.config.js` file.
 
@@ -137,7 +156,7 @@ module.exports = {
 
 Learn more here: [Dark Mode - Tailwind CSS](https://tailwindcss.com/docs/dark-mode).
 
-### Regular CSS
+#### Regular CSS
 
 Use `.dark` class. For example:
 
@@ -164,17 +183,21 @@ body.dark {
 }
 ```
 
-### 2. useLocalStorage
+## Utility &mdash; `useLocalStorage`
 
-The `useLocalStorage` hook takes **two string parameters**. The first parameter is the name of **key** in local storage and the second is the **default value** in case local storage does not already have value for the key.
+It behaves identical to `useState` with a plus that the state is saved in local storage and therefore persist over sessions.
 
-It behaves identical to `useState` with plus side that the state is saved in local storage.
+You need to provide a unique key and a default value if the value is not available in local storage.
 
 ```javascript
 import { useLocalStorage } from "use-doc-theme";
 
 function App() {
-  const [book, setBook] = useLocalStorage<string>("book", "The Alchemist by Paulo Coelho");
+
+  const [book, setBook] = useLocalStorage<string>(
+    "book", /* key */
+    "The Alchemist by Paulo Coelho" /* default value */
+  );
 
   return (
     <>
@@ -193,7 +216,7 @@ function App() {
 }
 ```
 
-Data saved into local storage gets JSON stringified so you may also save objects.
+> Data saved into local storage gets JSON stringified so you may also save objects.
 
 ## Contribution
 
